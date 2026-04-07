@@ -1,5 +1,5 @@
 import { Inngest } from "inngest";
-import prisma from "../configs/prisma";
+import prisma from "../configs/prisma.js";
 import { $Enums, Status } from "@prisma/client";
 
 
@@ -16,10 +16,10 @@ const SyncUserCreation = inngest.createFunction(
 
     if(user){
         await prisma.user.update({
-            Where:{id:data.id},
+            where:{id:data.id},
             data:{
                 email: data?.email_addresses[0]?.email_addresses,
-                name:data?.findFirst+" "+data?.last_name,
+                name:data?.first_name+" "+data?.last_name,
                 image:data?.image_url,
 
             }
